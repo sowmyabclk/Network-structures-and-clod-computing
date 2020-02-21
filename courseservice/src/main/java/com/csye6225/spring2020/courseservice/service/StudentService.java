@@ -34,6 +34,7 @@ public class StudentService {
 	public StudentService() {
 	}
 
+	//get all students
 	public List<Student> getAllStudents() {
 		ArrayList<Student> list = new ArrayList<>();
 		for (Student stud : stud_Map.values()) {
@@ -45,6 +46,7 @@ public class StudentService {
 		return list;
 	}
 
+	//adding a student
 	public Student addStudent(String firstName, String lastName, String img, List<Long> courseEnrolled,
 			long programId) {
 		if (programService.checkIfProgramExists(programId) && courseService.validateCourses(courseEnrolled)) {
@@ -63,6 +65,7 @@ public class StudentService {
 		}
 	}
 
+	//getting a single student
 	public Student getStudent(Long studId) {
 		if (stud_Map.containsKey(studId)) {
 
@@ -74,6 +77,7 @@ public class StudentService {
 		}
 	}
 
+	//deleting a student
 	public Student deleteStudent(Long studId) {
 		if (stud_Map.containsKey(studId)) {
 			Student deletedProfDetails = stud_Map.get(studId);
@@ -84,6 +88,7 @@ public class StudentService {
 		}
 	}
 
+	//updating a student information
 	public Student updateStudentInformation(long studId, Student stud) {
 		if (studId != stud.getStudentId()) {
 			throw new BadRequestException(Response.status(Response.Status.BAD_REQUEST)
@@ -108,6 +113,7 @@ public class StudentService {
 		return oldProfObject;
 	}
 
+	//filter students by course id
 	public List<Student> getStudentsByCoursesEnrolled(long courseEnrolled) {
 		ArrayList<Student> list = new ArrayList<>();
 		for (Student stud : stud_Map.values()) {
@@ -122,6 +128,7 @@ public class StudentService {
 		return list;
 	}
 
+	//filter students by program id
 	public List<Student> getStudentsByProgram(long programId) {
 		if (programService.checkIfProgramExists(programId)) {
 			ArrayList<Student> list = new ArrayList<>();
@@ -141,6 +148,7 @@ public class StudentService {
 		}
 	}
 
+	//filter students by professor id
 	public List<Student> getStudentsByProfessors(long professorId) {
 		ArrayList<Student> studs = new ArrayList<>();
 		boolean isExists = profService.checkIfProfessorExists(professorId);
@@ -173,6 +181,7 @@ public class StudentService {
 
 	}
 
+	//check if student exist
 	public boolean checkIfStudentExists(long professorId) {
 		if (stud_Map.containsKey(professorId)) {
 			return true;
@@ -180,7 +189,8 @@ public class StudentService {
 			return false;
 		}
 	}
-
+	
+	//get courses details for a student
 	public List<Course> getCoursesForStudent(List<Long> courses) {
 		List<Course> courseList = new ArrayList<>();
 		for (int i = 0; i < courses.size(); i++) {

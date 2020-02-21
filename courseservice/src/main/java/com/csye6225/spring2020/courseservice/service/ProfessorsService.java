@@ -37,6 +37,8 @@ public class ProfessorsService {
 	CourseService courseService = new CourseService();
 	ProgramNameService pgmService = new ProgramNameService();
 
+	
+	//get list of professors
 	public List<Professor> getAllProfessors() {
 		ArrayList<Professor> list = new ArrayList<>();
 		for (Professor prof : prof_Map.values()) {
@@ -48,6 +50,7 @@ public class ProfessorsService {
 		return list;
 	}
 
+	//add a professor
 	public Professor addProfessor(String firstName, String lastName, long programId, List<Long> courses,
 			String joiningDate) {
 		if (pgmService.checkIfProgramExists(programId) && courseService.validateCourses(courses)) {
@@ -64,6 +67,7 @@ public class ProfessorsService {
 		}
 	}
 
+	//getting one professor
 	public Professor getProfessor(Long profId) {
 		if (prof_Map.containsKey(profId)) {
 			Professor prof2 = prof_Map.get(profId);
@@ -74,6 +78,7 @@ public class ProfessorsService {
 		}
 	}
 
+	//deleting a professor
 	public Professor deleteProfessor(Long profId) {
 		if (prof_Map.containsKey(profId)) {
 			Professor deletedProfDetails = prof_Map.get(profId);
@@ -83,7 +88,8 @@ public class ProfessorsService {
 			throw new DataNotFoundException("professor id " + profId + " not avialble");
 		}
 	}
-
+	
+	//updating a professor
 	public Professor updateProfessorInformation(long profId, Professor prof) {
 		if (profId != prof.getProfessorId()) {
 			throw new BadRequestException(
@@ -107,6 +113,7 @@ public class ProfessorsService {
 		return oldProfObject;
 	}
 
+	//get professors by department id and size
 	public List<Professor> getProfessorsByDepartment(long programId, int size) {
 		int noOfvalues = 1;
 		ArrayList<Professor> list = new ArrayList<>();
@@ -119,7 +126,6 @@ public class ProfessorsService {
 					}
 				} else {
 					if (prof.getProgramId() == programId) {
-						System.out.println(1);
 						list.add(prof);
 
 					}
@@ -135,6 +141,7 @@ public class ProfessorsService {
 		}
 	}
 
+	//checking if professor exists
 	public boolean checkIfProfessorExists(long professorId) {
 		if (prof_Map.containsKey(professorId)) {
 			return true;
@@ -143,6 +150,7 @@ public class ProfessorsService {
 		}
 	}
 
+	//getting professor list by year and size limit
 	public List<Professor> getProfessorsByYear(String year, int size) throws ParseException {
 		ArrayList<Professor> list = new ArrayList<>();
 		int noOfvalues = 1;

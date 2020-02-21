@@ -30,7 +30,9 @@ public class CourseService {
 
 	Professor prof = new Professor();
 	Student stud = new Student();
-
+	
+	
+	//get all courses
 	public List<Course> getAllCourses() {
 		ArrayList<Course> list = new ArrayList<>();
 		for (Course course : course_Map.values()) {
@@ -43,6 +45,7 @@ public class CourseService {
 		return list;
 	}
 
+	//adding a course
 	public Course addCourse(String courseName, long profId, long programId, String startDate, String endDate,
 			String courseMaterial, long studentTA) {
 		System.out.println(profId + " " + programId + " " + studentTA);
@@ -54,6 +57,8 @@ public class CourseService {
 		return course;
 
 	}
+	
+	//getting a single course
 
 	public Course getCourse(Long courseId) {
 		if (course_Map.containsKey(courseId)) {
@@ -65,6 +70,7 @@ public class CourseService {
 
 	}
 
+	//deleting a course
 	public Course deleteCourse(Long courseId) {
 		if (course_Map.containsKey(courseId)) {
 
@@ -75,6 +81,8 @@ public class CourseService {
 			throw new DataNotFoundException("Course id " + courseId + " not avialble");
 		}
 	}
+	
+	//updating a course
 
 	public Course updateCourseInformation(long courseId, Course course) {
 		if (courseId != course.getCourseId()) {
@@ -93,6 +101,7 @@ public class CourseService {
 		return oldcourseCourseObject;
 	}
 
+	//getting course list for a program id
 	public List<Course> getCoursesByProgram(long programId) {
 		ArrayList<Course> courseList = new ArrayList<>();
 		for (Course course : course_Map.values()) {
@@ -107,6 +116,7 @@ public class CourseService {
 
 	}
 
+	//function to validate courses
 	public boolean validateCourses(List<Long> courses) {
 		for (int i = 0; i < courses.size(); i++) {
 			if (!course_Map.containsKey(courses.get(i))) {

@@ -33,6 +33,7 @@ public class ProgramNameService {
 	public ProgramNameService() {
 	}
 
+	//getting list of programs
 	public List<ProgramName> getAllProgramNames() {
 		ArrayList<ProgramName> list = new ArrayList<>();
 		for (ProgramName programName : program_Map.values()) {
@@ -43,7 +44,9 @@ public class ProgramNameService {
 		}
 		return list;
 	}
-
+	
+	
+	//adding a program 
 	public ProgramName addProgramName(String programName, List<Long> courses, String duration) {
 
 		long nextAvailableId = program_Map.size() + 1;
@@ -52,7 +55,9 @@ public class ProgramNameService {
 		return pgmName;
 
 	}
-
+	
+	//getting single program details
+	
 	public ProgramName getProgramName(Long programId) {
 		if (program_Map.containsKey(programId)) {
 			ProgramName pgmName = program_Map.get(programId);
@@ -63,6 +68,8 @@ public class ProgramNameService {
 		}
 	}
 
+	//delete program details
+	
 	public ProgramName deleteProgramName(Long programId) {
 		if (program_Map.containsKey(programId)) {
 			ProgramName deletedProfDetails = program_Map.get(programId);
@@ -73,6 +80,8 @@ public class ProgramNameService {
 		}
 	}
 
+	//updating program information
+	
 	public ProgramName updateProgramInformation(long programId, ProgramName programName) {
 		if (programId != programName.getProgramId()) {
 			throw new BadRequestException(Response
@@ -88,6 +97,8 @@ public class ProgramNameService {
 		oldcourseCourseObject.setDuration(programName.getDuration());
 		return oldcourseCourseObject;
 	}
+	
+	//get list of programs by course id
 
 	public List<ProgramName> getProgramByCourseId(long courseId) {
 		ArrayList<ProgramName> list = new ArrayList<>();
@@ -102,6 +113,7 @@ public class ProgramNameService {
 		return list;
 	}
 
+	//get course details for a program
 	public List<Course> getCoursesForProgram(List<Long> courses) {
 		List<Course> courseList = new ArrayList<>();
 		for (int i = 0; i < courses.size(); i++) {
@@ -115,6 +127,7 @@ public class ProgramNameService {
 
 	}
 
+	//checking if program exists
 	public boolean checkIfProgramExists(long professorId) {
 		if (program_Map.containsKey(professorId)) {
 			return true;

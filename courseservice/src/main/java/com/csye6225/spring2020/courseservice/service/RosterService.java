@@ -34,6 +34,7 @@ public class RosterService {
 	public RosterService() {
 	}
 
+	//getting list of rosters
 	public List<Roster> getRosterDetails() {
 		ArrayList<Roster> list = new ArrayList<>();
 		for (Roster roster : Roster_Map.values()) {
@@ -45,6 +46,7 @@ public class RosterService {
 		return list;
 	}
 
+	// get list of rosters for prof id
 	public List<Roster> getRosterDetailsForProfessor(long profId) {
 		ArrayList<Roster> list = new ArrayList<>();
 		for (Roster roster : Roster_Map.values()) {
@@ -58,6 +60,7 @@ public class RosterService {
 		return list;
 	}
 
+	//check if roster exists
 	public boolean checkifRosterExists(long courseId) {
 		if (Roster_Map.containsKey(courseId)) {
 			return true;
@@ -66,6 +69,7 @@ public class RosterService {
 		}
 	}
 
+	//adding roster details
 	public Roster addRoster(long couserId, long profId, String day, String time) {
 		Roster roster = null;
 		if (courseService.getCourse(couserId).getCourseId() == couserId
@@ -90,6 +94,7 @@ public class RosterService {
 
 	}
 
+	//getting a single roster
 	public Roster getRoster(long courseId) {
 		if (Roster_Map.containsKey(courseId)) {
 
@@ -100,6 +105,8 @@ public class RosterService {
 			throw new DataNotFoundException("roster for course id " + courseId + " not avialble");
 		}
 	}
+	
+	//deleting a single roster
 
 	public Roster deleteRosterDetails(Long courseId) {
 		if (Roster_Map.containsKey(courseId)) {
@@ -111,13 +118,15 @@ public class RosterService {
 		}
 	}
 
+	//updating a roster details
 	public Roster updateRosterDetails(long courseId, Roster roster) {
-		if (courseId != roster.getCourseId()) {
+		if (courseId != roster.getCourseId() || !Roster_Map.containsKey(courseId)) {
 			throw new BadRequestException(Response.status(Response.Status.BAD_REQUEST).entity(
-					"course Id " + courseId + " " + "in the syntax does not match with the " + roster.getCourseId())
+					"Error Message:course Id " + courseId + " " + "in the syntax does not match with the " + roster.getCourseId()+" or cours id "+courseId+" does not exist in roster")
 					.build());
 
 		}
+		
 		Roster oldRosterObject = Roster_Map.get(courseId);
 		oldRosterObject.setDay(roster.getDay());
 		oldRosterObject.setTime(roster.getTime());
