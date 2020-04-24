@@ -1,0 +1,14 @@
+com\amazonaws\lambda\datamodel\Course.class
+com\amazonaws\lambda\demo\NewCourseFunction.class
+com\amazonaws\lambda\datamodel\Board.class
+com\amazonaws\lambda\demo\FanoutMessageLambda.class
+com\amazonaws\lambda\demo\CourseCheck.class
+com\amazonaws\lambda\datamodel\Announcement.class
+com\amazonaws\lambda\datamodel\Professor.class
+com\amazonaws\lambda\datamodel\DynamoDbConnector.class
+com\amazonaws\lambda\demo\SubscriberLambda.class
+com\amazonaws\lambda\demo\GetAnnouncementMessage.class
+com\amazonaws\lambda\demo\LambdaFunctionHandler.class
+com\amazonaws\lambda\datamodel\Registrar.class
+com\amazonaws\lambda\demo\AddRegistrarRecord.class
+com\amazonaws\lambda\demo\DepartmentCheck.class
